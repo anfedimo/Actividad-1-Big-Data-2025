@@ -130,10 +130,7 @@ doc.save('/content/drive/MyDrive/BigData_Emergencias_123/Resultados_SIES.docx')
 - Localidades con más emergencias: **Kennedy, Engativá, Suba**
 - Tipos de incidente más frecuentes: **Heridos accidentales, inconscientes, eventos respiratorios**
 - Cobertura temporal: **01/09/2025 – 01/10/2025**
+- Enlace: [https://colab.research.google.com/drive/1HsbSYHX8ALWWXZ-t-Eb2RbRWBWGYuO5B?userstoinvite=falconorion92%40gmail.com&sharingaction=manageaccess&role=writer#scrollTo=7rxDEy9z6vVa](https://colab.research.google.com/drive/1HsbSYHX8ALWWXZ-t-Eb2RbRWBWGYuO5B?userstoinvite=falconorion92%40gmail.com&sharingaction=manageaccess&role=writer#scrollTo=7rxDEy9z6vVa)
 
 ---
-
-### 💡 Próximos pasos
-- Unir varios meses para análisis temporal extendido.
-- Realizar clustering o predicción de demanda.
-- Generar dashboard en Power BI o Google Data Studio.
+Arquitectura de Software — Universidad de La Sabana — Andree Fernando Diaz Moreno — 2025  
