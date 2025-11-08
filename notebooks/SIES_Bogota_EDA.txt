@@ -1,0 +1,137 @@
+Consulta ipynb #%%
+import pandas as pd
+
+ruta = "/content/drive/MyDrive/BigData_Emergencias_123/llamadas_123_sep_2025.csv"
+
+df_emergencias = pd.read_csv(ruta, encoding='latin1', sep=';')
+
+print(" Archivo cargado y separado correctamente")
+df_emergencias.info()
+
+
+#Resultados
+Archivo cargado y separado correctamente
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 11433 entries, 0 to 11432
+Data columns (total 10 columns):
+#   Column                             Non-Null Count  Dtype
+---  ------                             --------------  -----
+0   NUMERO_INCIDENTE                   11433 non-null  object
+1   FECHA_INICIO_DESPLAZAMIENTO_MOVIL  11433 non-null  object
+2   CODIGO_LOCALIDAD                   11433 non-null  object
+3   LOCALIDAD                          11433 non-null  object
+4   EDAD                               6856 non-null   float64
+5   UNIDAD                             6856 non-null   object
+6   GENERO                             6856 non-null   object
+7   TIPO_INCIDENTE                     11433 non-null  object
+8   PRIORIDAD_FINAL                    11433 non-null  object
+9   RECEPCION                          11433 non-null  object
+dtypes: float64(1), object(9)
+memory usage: 893.3+ KB
+
+
+# --- ANÁLISIS EXPLORATORIO BÁSICO ---
+
+print(" Dimensiones del dataset:", df_emergencias.shape)
+print("\n Tipos de datos y valores nulos:")
+print(df_emergencias.info())
+
+print("\n Porcentaje de valores nulos por columna:")
+print((df_emergencias.isnull().sum() / len(df_emergencias) * 100).round(2))
+
+print("\n Estadísticas descriptivas (numéricas):")
+print(df_emergencias.describe())
+
+print("\n Emergencias por localidad (Top 10):")
+print(df_emergencias['LOCALIDAD'].value_counts().head(10))
+
+print("\n Tipos de incidentes más frecuentes (Top 10):")
+print(df_emergencias['TIPO_INCIDENTE'].value_counts().head(10))
+
+# --- Limpieza y conversión de fechas ---
+df_emergencias['FECHA_INICIO_DESPLAZAMIENTO_MOVIL'] = pd.to_datetime(
+    df_emergencias['FECHA_INICIO_DESPLAZAMIENTO_MOVIL'], errors='coerce'
+)
+
+print("\n Rango temporal de las emergencias:")
+print(df_emergencias['FECHA_INICIO_DESPLAZAMIENTO_MOVIL'].min(), "→", df_emergencias['FECHA_INICIO_DESPLAZAMIENTO_MOVIL'].max())
+
+
+Resultados:
+
+Dimensiones del dataset: (11433, 10)
+
+ Tipos de datos y valores nulos:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 11433 entries, 0 to 11432
+Data columns (total 10 columns):
+ #   Column                             Non-Null Count  Dtype
+---  ------                             --------------  -----
+ 0   NUMERO_INCIDENTE                   11433 non-null  object
+ 1   FECHA_INICIO_DESPLAZAMIENTO_MOVIL  11433 non-null  object
+ 2   CODIGO_LOCALIDAD                   11433 non-null  object
+ 3   LOCALIDAD                          11433 non-null  object
+ 4   EDAD                               6856 non-null   float64
+ 5   UNIDAD                             6856 non-null   object
+ 6   GENERO                             6856 non-null   object
+ 7   TIPO_INCIDENTE                     11433 non-null  object
+ 8   PRIORIDAD_FINAL                    11433 non-null  object
+ 9   RECEPCION                          11433 non-null  object
+dtypes: float64(1), object(9)
+memory usage: 893.3+ KB
+None
+
+ Porcentaje de valores nulos por columna:
+NUMERO_INCIDENTE                      0.00
+FECHA_INICIO_DESPLAZAMIENTO_MOVIL     0.00
+CODIGO_LOCALIDAD                      0.00
+LOCALIDAD                             0.00
+EDAD                                 40.03
+UNIDAD                               40.03
+GENERO                               40.03
+TIPO_INCIDENTE                        0.00
+PRIORIDAD_FINAL                       0.00
+RECEPCION                             0.00
+dtype: float64
+
+ Estadísticas descriptivas (numéricas):
+              EDAD
+count  6856.000000
+mean     45.572637
+std      25.460405
+min       1.000000
+25%      24.000000
+50%      40.000000
+75%      68.000000
+max     109.000000
+
+ Emergencias por localidad (Top 10):
+LOCALIDAD
+KENNEDY               1475
+ENGATIVµ              1211
+SUBA                  1113
+CIUDAD BOLÖVAR         941
+BOSA                   899
+PUENTE ARANDA          654
+SAN CRISTàBAL          612
+RAFAEL URIBE URIBE     572
+FONTIBàN               560
+USAQUN                476
+Name: count, dtype: int64
+
+ Tipos de incidentes más frecuentes (Top 10):
+TIPO_INCIDENTE
+HERIDO - HERIDOS ACCIDENTALES                           2699
+INCONSCIEN - INCONSCIENTE O PARO CARDIORRESPIRATORIO    1125
+EVERES - EVENTO RESPIRATORIO                            1111
+ENFERMO                                                 1100
+TRASTMENT - TRASTORNO MENTAL                            1011
+CONVULSIàN - CONVULSIàN                                  968
+INTSUI - INTENTO DE SUICIDIO                             709
+DOLTOR - DOLOR TORµCICO                                  552
+SINTOGASTR - SÖNTOMAS GASTROINTESTINALES                 357
+AMESUI  - AMENAZA DE SUICIDIO                            356
+Name: count, dtype: int64
+
+ Rango temporal de las emergencias:
+2025-09-01 00:01:16 → 2025-10-01 00:57:18
